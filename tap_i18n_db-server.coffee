@@ -24,6 +24,7 @@ share.i18nCollectionExtensions = (obj) ->
     original_fields = options.fields || {}
     i18n_fields = _.extend {}, original_fields
 
+    console.log("orig fiels i18n", original_fields, i18n_fields)
     if not _.isEmpty(i18n_fields)
       # determine the projection kind
       # note that we don't need to address the case where {_id: 0}, since _id: 0
@@ -61,6 +62,8 @@ share.i18nCollectionExtensions = (obj) ->
           if lang != collection_base_language and lang != current_language and lang != dialect_of
             i18n_fields["i18n.#{lang}"] = 0
 
+    console.log("sel, i18n", selector)
+    
     return @.find(selector, _.extend({}, options, {fields: i18n_fields}))
 
   return obj
