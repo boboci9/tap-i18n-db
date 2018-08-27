@@ -3,7 +3,9 @@ Fiber = Npm.require('fibers')
 share.i18nCollectionExtensions = (obj) ->
   obj.i18nFind = (selector, options) ->
     current_language = Fiber.current.language_tag
-
+    
+    console.log("i18n language", current_language)
+    
     if typeof current_language == "undefined"
       throw new Meteor.Error(500, "TAPi18n.i18nFind should be called only from TAPi18n.publish functions")
 
