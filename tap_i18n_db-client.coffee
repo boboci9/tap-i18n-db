@@ -2,6 +2,7 @@ removeTrailingUndefs = share.helpers.removeTrailingUndefs
 extend = $.extend
 
 share.i18nCollectionTransform = (doc, collection) ->
+  console.log("i18nCollectionTransform 1", doc, collection);
   for route in collection._disabledOnRoutes
     if route.test(window.location.pathname)
       return doc
@@ -9,6 +10,7 @@ share.i18nCollectionTransform = (doc, collection) ->
   collection_base_language = collection._base_language
   language = TAPi18n.getLanguage()
 
+  console.log("i18nCollectionTransform 2", language);
   if not language? or not doc.i18n?
     delete doc.i18n
 
@@ -25,11 +27,13 @@ share.i18nCollectionTransform = (doc, collection) ->
       # current language
       doc = extend(true, {}, doc.i18n[dialect_of], doc)
 
+  console.log("i18nCollectionTransform 3", doc.i18n[language]);
   if doc.i18n[language]?
     extend(true, doc, doc.i18n[language])
 
   delete doc.i18n
 
+  console.log("i18nCollectionTransform 4", doc);
   return doc
 
 share.i18nCollectionExtensions = (obj) ->
